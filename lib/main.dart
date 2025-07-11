@@ -1,4 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:register_app/emergency_plan.dart';
+import 'package:register_app/employee_register.dart';
+import 'package:register_app/home_screen.dart';
+import 'package:register_app/induction_check.dart';
+import 'package:register_app/placework_rates.dart';
+import 'package:register_app/rules_regu.dart';
+import 'package:register_app/splashscreen.dart';
+import 'package:register_app/staff_hygiene.dart';
+import 'package:register_app/workplace_health.dart';
 
 void main() => runApp(MyApp());
 
@@ -13,8 +22,19 @@ class MyApp extends StatelessWidget {
         // Set the app's primary theme color
         primarySwatch: Colors.green,
       ),
-      title: 'Flutter Form Example',
-      home: MyForm(),
+      initialRoute: '/',
+      routes: {
+        '/': (context) => const SplashScreen(),
+        '/home': (context) => const MyForm(), // Adjust your home route
+        '/employeeRegister': (context) => const EmployeeRegister(),
+        '/emergencyPlan': (context) => const EmergencyPlan(),
+        '/inductionCheck': (context) => const InductionCheck(),
+        '/homeScreen': (context) => const HomeScreen(),
+        '/placework_rates': (context) => const PlaceworkRates(),
+        '/staff_hygiene': (context) => const StaffHygiene(),
+        '/workplace_health': (context) => const WorkplaceHealth(),
+        '/rules_regulations': (context) => const RulesRegu(),
+      },
     );
   }
 }
