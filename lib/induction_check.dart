@@ -5,7 +5,7 @@ class InductionCheck extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Scaffold(
-    appBar: AppBar(title: Text('Home')),
-    body: Center(child: Text('Home Screen')),
+    appBar: AppBar(title: Text('Induction Checklist')),
+    body: Center(child: Text('Induction Check Screen')),
   );
 }

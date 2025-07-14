@@ -5,7 +5,7 @@ class StaffHygiene extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Scaffold(
-    appBar: AppBar(title: Text('Home')),
-    body: Center(child: Text('Home Screen')),
+    appBar: AppBar(title: Text('Staff Hygiene')),
+    body: Center(child: Text('Staff Hygiene Screen')),
   );
 }

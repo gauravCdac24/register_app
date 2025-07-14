@@ -5,7 +5,7 @@ class RulesRegu extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Scaffold(
-    appBar: AppBar(title: Text('Home')),
-    body: Center(child: Text('Home Screen')),
+    appBar: AppBar(title: Text('Rules and Regulations')),
+    body: Center(child: Text('Rules and Regulations Screen')),
   );
 }

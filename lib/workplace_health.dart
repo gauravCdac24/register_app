@@ -5,7 +5,7 @@ class WorkplaceHealth extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Scaffold(
-    appBar: AppBar(title: Text('Home')),
-    body: Center(child: Text('Home Screen')),
+    appBar: AppBar(title: Text('Workplace Health')),
+    body: Center(child: Text('Workplace Health Screen')),
   );
 }
