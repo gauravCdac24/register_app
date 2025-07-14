@@ -14,11 +14,35 @@ class _EmployeeRegister extends State<EmployeeRegister> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   // Variable to store the entered name
-  String _name = '';
+  String _first_name = '';
+  String _last_name = '';
+  String _address = '';
+  String _contact_number = '';
+  String _email = '';
+  String _date_of_birth = '';
+  String _tax_file = '';
+  String _country = '';
+  String _visa_type = '';
+  String _visa_from = '';
+  String _visa_to = '';
+  String _passport_number = '';
+  String _date_employed = '';
+  String _employement_status = '';
+  String _employement_type = '';
+  String _ordinary_hours = '';
+  String _method_of_payment = '';
+  String _pay_period = '';
+  String _apprenticeship_or_training = '';
+  String _name_of_award = '';
+  String _classification = '';
+  String _superannuation_fund = '';
+  String _superannuation_membership_number = '';
+  String _bank_name = '';
+  String _account_name = '';
+  String _BSB_number = '';
+  String _account_number = '';
 
   // Variable to store the entered email
-  String _email = '';
-
   void _submitForm() {
     // Check if the form is valid
     if (_formKey.currentState!.validate()) {
@@ -27,7 +51,7 @@ class _EmployeeRegister extends State<EmployeeRegister> {
 
       // You can perform actions with the form
       // data here and extract the details
-      print('Name: $_name'); // Print the name
+      print('Name: $_first_name'); // Print the name
       print('Email: $_email'); // Print the email
     }
   }
@@ -58,7 +82,7 @@ class _EmployeeRegister extends State<EmployeeRegister> {
                 },
                 onSaved: (value) {
                   // Save the entered name
-                  _name = value!;
+                  _first_name = value!;
                 },
               ),
               TextFormField(
