@@ -1,121 +1,458 @@
-// ignore_for_file: library_private_types_in_public_api
-
 import 'package:flutter/material.dart';
 
-class EmployeeRegister extends StatefulWidget {
-  const EmployeeRegister({super.key});
+void main() => runApp(MaterialApp(home: EmployeeFormPage()));
 
+class EmployeeFormPage extends StatefulWidget {
   @override
-  _EmployeeRegister createState() => _EmployeeRegister();
+  State<EmployeeFormPage> createState() => _EmployeeFormPageState();
 }
 
-class _EmployeeRegister extends State<EmployeeRegister> {
-  // A key for managing the form
-  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+class _EmployeeFormPageState extends State<EmployeeFormPage> {
+  final _formKey = GlobalKey<FormState>();
 
-  // Variable to store the entered name
-  String _first_name = '';
-  String _last_name = '';
-  String _address = '';
-  String _contact_number = '';
-  String _email = '';
-  String _date_of_birth = '';
-  String _tax_file = '';
-  String _country = '';
-  String _visa_type = '';
-  String _visa_from = '';
-  String _visa_to = '';
-  String _passport_number = '';
-  String _date_employed = '';
-  String _employement_status = '';
-  String _employement_type = '';
-  String _ordinary_hours = '';
-  String _method_of_payment = '';
-  String _pay_period = '';
-  String _apprenticeship_or_training = '';
-  String _name_of_award = '';
-  String _classification = '';
-  String _superannuation_fund = '';
-  String _superannuation_membership_number = '';
-  String _bank_name = '';
-  String _account_name = '';
-  String _BSB_number = '';
-  String _account_number = '';
+  // Form field variables
+  String? firstName, lastName, address, contactNo, email, dob, taxFile;
+  String? country, visaType, visaFrom, visaTo, passport, employmentStartDate;
+  String? employmentStatus, employmentType, paymentMethod, payPeriod;
+  String? superFund, superNumber, bankName, bankAccountName, bsb, accNumber;
+  String? jobTitle, awardName, hoursWorked;
+  String? pieceworkDescription, agreementStartDate;
 
-  // Variable to store the entered email
-  void _submitForm() {
-    // Check if the form is valid
-    if (_formKey.currentState!.validate()) {
-      // Save the form data
-      _formKey.currentState!.save();
+  bool showOtherEmploymentStatus = false;
+  String? otherEmploymentStatus;
+  bool showOtherType = false;
+  String? otherType;
 
-      // You can perform actions with the form
-      // data here and extract the details
-      print('Name: $_first_name'); // Print the name
-      print('Email: $_email'); // Print the email
-    }
-  }
+  List<String> covidAnswers = List.filled(6, '');
+  List<bool> inductionChecklist = List.filled(9, false);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Flutter Form Example')),
-      body: Form(
-        // Associate the form key with this Form widget
-        key: _formKey,
-        child: Padding(
-          padding: EdgeInsets.all(16.0),
+      appBar: AppBar(title: Text('BIRVA Employee & Rate Form')),
+      body: SingleChildScrollView(
+        padding: EdgeInsets.all(16),
+        child: Form(
+          key: _formKey,
           child: Column(
-            children: <Widget>[
-              TextFormField(
-                // Label for the name field
-                decoration: InputDecoration(labelText: 'Name'),
-                validator: (value) {
-                  // Validation function for the name field
-                  if (value!.isEmpty) {
-                    // Return an error message if the name is empty
-                    return 'Please enter your name.';
-                  }
-
-                  // Return null if the name is valid
-                  return null;
-                },
-                onSaved: (value) {
-                  // Save the entered name
-                  _first_name = value!;
-                },
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                "Employee Details",
+                style: Theme.of(context).textTheme.headline6,
               ),
-              TextFormField(
-                // Label for the email field
-                decoration: InputDecoration(labelText: 'Email'),
-                validator: (value) {
-                  // Validation function for the email field
-                  if (value!.isEmpty) {
-                    // Return an error message if the email is empty
-                    return 'Please enter your email.';
-                  }
-
-                  // You can add more complex validation logic here
-                  return null; // Return null if the email is valid
-                },
-                onSaved: (value) {
-                  // Save the entered email
-                  _email = value!;
-                },
-              ),
-              SizedBox(height: 20.0),
+              _buildNameFields(),
+              _buildAddressContactFields(),
+              _buildDOBTaxVisaFields(),
+              _buildPassportEmploymentFields(),
+              _buildEmploymentStatusFields(),
+              _buildPayFields(),
+              _buildSuperFields(),
+              _buildBankFields(),
+              _buildPieceworkAgreementFields(),
+              _buildScheduleARates(),
+              _buildCovidDeclaration(),
+              _buildInductionChecklist(),
+              SizedBox(height: 20),
               ElevatedButton(
-                // Call the _submitForm function when
-                // the button is pressed
-                onPressed: _submitForm,
-
-                // Text on the button
-                child: Text('Submit'),
+                child: Text("Submit"),
+                onPressed: () {
+                  if (_formKey.currentState!.validate()) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(content: Text("Form submitted successfully")),
+                    );
+                  }
+                },
               ),
             ],
           ),
         ),
       ),
+    );
+  }
+
+  Widget _buildNameFields() {
+    return Row(
+      children: [
+        Expanded(
+          child: TextFormField(
+            decoration: InputDecoration(labelText: "First Name"),
+            onChanged: (val) => firstName = val,
+          ),
+        ),
+        SizedBox(width: 10),
+        Expanded(
+          child: TextFormField(
+            decoration: InputDecoration(labelText: "Last Name"),
+            onChanged: (val) => lastName = val,
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildAddressContactFields() {
+    return Column(
+      children: [
+        TextFormField(
+          decoration: InputDecoration(labelText: "Address"),
+          onChanged: (val) => address = val,
+        ),
+        Row(
+          children: [
+            Expanded(
+              child: TextFormField(
+                decoration: InputDecoration(labelText: "Contact No"),
+                onChanged: (val) => contactNo = val,
+              ),
+            ),
+            SizedBox(width: 10),
+            Expanded(
+              child: TextFormField(
+                decoration: InputDecoration(labelText: "Email"),
+                onChanged: (val) => email = val,
+              ),
+            ),
+          ],
+        ),
+      ],
+    );
+  }
+
+  Widget _buildDOBTaxVisaFields() {
+    return Column(
+      children: [
+        Row(
+          children: [
+            Expanded(
+              child: TextFormField(
+                decoration: InputDecoration(labelText: "Date of Birth"),
+                onChanged: (val) => dob = val,
+              ),
+            ),
+            SizedBox(width: 10),
+            Expanded(
+              child: TextFormField(
+                decoration: InputDecoration(labelText: "Tax File Number"),
+                onChanged: (val) => taxFile = val,
+              ),
+            ),
+          ],
+        ),
+        Row(
+          children: [
+            Expanded(
+              child: TextFormField(
+                decoration: InputDecoration(labelText: "Country"),
+                onChanged: (val) => country = val,
+              ),
+            ),
+            SizedBox(width: 10),
+            Expanded(
+              child: TextFormField(
+                decoration: InputDecoration(labelText: "Visa Type"),
+                onChanged: (val) => visaType = val,
+              ),
+            ),
+          ],
+        ),
+        Row(
+          children: [
+            Expanded(
+              child: TextFormField(
+                decoration: InputDecoration(labelText: "Visa From"),
+                onChanged: (val) => visaFrom = val,
+              ),
+            ),
+            SizedBox(width: 10),
+            Expanded(
+              child: TextFormField(
+                decoration: InputDecoration(labelText: "Visa To"),
+                onChanged: (val) => visaTo = val,
+              ),
+            ),
+          ],
+        ),
+      ],
+    );
+  }
+
+  Widget _buildPassportEmploymentFields() {
+    return Column(
+      children: [
+        TextFormField(
+          decoration: InputDecoration(labelText: "Passport Number"),
+          onChanged: (val) => passport = val,
+        ),
+        TextFormField(
+          decoration: InputDecoration(labelText: "Employment Start Date"),
+          onChanged: (val) => employmentStartDate = val,
+        ),
+      ],
+    );
+  }
+
+  Widget _buildEmploymentStatusFields() {
+    return Column(
+      children: [
+        DropdownButtonFormField<String>(
+          decoration: InputDecoration(labelText: "Employment Status"),
+          items: [
+            "Ongoing",
+            "Temporary",
+            "Other",
+          ].map((e) => DropdownMenuItem(value: e, child: Text(e))).toList(),
+          onChanged: (val) {
+            setState(() {
+              employmentStatus = val;
+              showOtherEmploymentStatus = val == "Other";
+            });
+          },
+        ),
+        if (showOtherEmploymentStatus)
+          TextFormField(
+            decoration: InputDecoration(labelText: "Specify Other Status"),
+            onChanged: (val) => otherEmploymentStatus = val,
+          ),
+        DropdownButtonFormField<String>(
+          decoration: InputDecoration(labelText: "Employment Type"),
+          items: [
+            "Full-time",
+            "Part-time",
+            "Casual",
+            "Other",
+          ].map((e) => DropdownMenuItem(value: e, child: Text(e))).toList(),
+          onChanged: (val) {
+            setState(() {
+              employmentType = val;
+              showOtherType = val == "Other";
+            });
+          },
+        ),
+        if (showOtherType)
+          TextFormField(
+            decoration: InputDecoration(labelText: "Specify Other Type"),
+            onChanged: (val) => otherType = val,
+          ),
+        TextFormField(
+          decoration: InputDecoration(labelText: "Ordinary Hours Worked"),
+          onChanged: (val) => hoursWorked = val,
+        ),
+      ],
+    );
+  }
+
+  Widget _buildPayFields() {
+    return Column(
+      children: [
+        DropdownButtonFormField<String>(
+          decoration: InputDecoration(labelText: "Method of Pay"),
+          items: [
+            "CASH",
+            "BANK",
+          ].map((e) => DropdownMenuItem(value: e, child: Text(e))).toList(),
+          onChanged: (val) => paymentMethod = val,
+        ),
+        DropdownButtonFormField<String>(
+          decoration: InputDecoration(labelText: "Pay Period"),
+          items: [
+            "WEEKLY",
+            "FORTNIGHTLY",
+          ].map((e) => DropdownMenuItem(value: e, child: Text(e))).toList(),
+          onChanged: (val) => payPeriod = val,
+        ),
+      ],
+    );
+  }
+
+  Widget _buildSuperFields() {
+    return Column(
+      children: [
+        SizedBox(height: 20),
+        Text("Superannuation", style: Theme.of(context).textTheme.headline6),
+        TextFormField(
+          decoration: InputDecoration(labelText: "Super Fund Name"),
+          onChanged: (val) => superFund = val,
+        ),
+        TextFormField(
+          decoration: InputDecoration(labelText: "Membership Number"),
+          onChanged: (val) => superNumber = val,
+        ),
+      ],
+    );
+  }
+
+  Widget _buildBankFields() {
+    return Column(
+      children: [
+        SizedBox(height: 20),
+        Text("Bank Details", style: Theme.of(context).textTheme.headline6),
+        TextFormField(
+          decoration: InputDecoration(labelText: "Bank Name"),
+          onChanged: (val) => bankName = val,
+        ),
+        TextFormField(
+          decoration: InputDecoration(labelText: "Account Name"),
+          onChanged: (val) => bankAccountName = val,
+        ),
+        Row(
+          children: [
+            Expanded(
+              child: TextFormField(
+                decoration: InputDecoration(labelText: "BSB"),
+                onChanged: (val) => bsb = val,
+              ),
+            ),
+            SizedBox(width: 10),
+            Expanded(
+              child: TextFormField(
+                decoration: InputDecoration(labelText: "Account Number"),
+                onChanged: (val) => accNumber = val,
+              ),
+            ),
+          ],
+        ),
+      ],
+    );
+  }
+
+  Widget _buildPieceworkAgreementFields() {
+    return Column(
+      children: [
+        SizedBox(height: 30),
+        Text(
+          "Piecework Agreement",
+          style: Theme.of(context).textTheme.headline6,
+        ),
+        TextFormField(
+          decoration: InputDecoration(labelText: "Description of Work"),
+          onChanged: (val) => pieceworkDescription = val,
+        ),
+        DropdownButtonFormField<String>(
+          decoration: InputDecoration(labelText: "Employment Type"),
+          items: [
+            "Casual",
+            "Part-time",
+            "Full-time",
+          ].map((e) => DropdownMenuItem(value: e, child: Text(e))).toList(),
+          onChanged: (val) => employmentType = val,
+        ),
+        TextFormField(
+          decoration: InputDecoration(labelText: "Agreement Start Date"),
+          onChanged: (val) => agreementStartDate = val,
+        ),
+      ],
+    );
+  }
+
+  Widget _buildScheduleARates() {
+    final rates = [
+      "Shallot Picking (green): \$8.75/box",
+      "Shallot Picking (purple): \$9.00/box",
+      "Broccolini Bunching: \$63.00/bin",
+      "Tractor/Ute Driving: \$32.00/hour",
+      "Forklift Driving: \$32.00/hour",
+      "Stockcounting Pallet: \$7.00/crate",
+      "Broccolini Picking: \$63.00/bin",
+    ];
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        SizedBox(height: 20),
+        Text(
+          "Schedule A: Piecework Rates",
+          style: Theme.of(context).textTheme.headline6,
+        ),
+        ...rates.map(
+          (rate) => TextFormField(initialValue: rate, enabled: false),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildCovidDeclaration() {
+    final questions = [
+      "Are you a confirmed case of COVID-19?",
+      "Close contact with a confirmed case in last 14 days?",
+      "Returned from overseas in last 14 days?",
+      "Close contact with someone from overseas in last 14 days?",
+      "Close contact with someone with flu symptoms?",
+      "Do you have flu-like symptoms currently or in last 48 hours?",
+    ];
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        SizedBox(height: 30),
+        Text(
+          "COVID-19 Health Declaration",
+          style: Theme.of(context).textTheme.headline6,
+        ),
+        ...questions.asMap().entries.map((entry) {
+          final i = entry.key;
+          final q = entry.value;
+          return Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              SizedBox(height: 10),
+              Text(q),
+              Row(
+                children: [
+                  Expanded(
+                    child: RadioListTile<String>(
+                      title: Text("Yes"),
+                      value: "Yes",
+                      groupValue: covidAnswers[i],
+                      onChanged: (val) =>
+                          setState(() => covidAnswers[i] = val!),
+                    ),
+                  ),
+                  Expanded(
+                    child: RadioListTile<String>(
+                      title: Text("No"),
+                      value: "No",
+                      groupValue: covidAnswers[i],
+                      onChanged: (val) =>
+                          setState(() => covidAnswers[i] = val!),
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          );
+        }),
+      ],
+    );
+  }
+
+  Widget _buildInductionChecklist() {
+    final items = [
+      "Intro to farm, team, conduct",
+      "Employment terms and conditions",
+      "Signed contracts and documents",
+      "Rosters and leave procedures",
+      "Company policies",
+      "OHS and safety",
+      "Farm tour and general info",
+      "Emergency contacts and fire safety",
+      "Machinery usage",
+    ];
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        SizedBox(height: 30),
+        Text(
+          "Induction Checklist",
+          style: Theme.of(context).textTheme.headline6,
+        ),
+        ...items.asMap().entries.map((entry) {
+          final i = entry.key;
+          return CheckboxListTile(
+            title: Text(entry.value),
+            value: inductionChecklist[i],
+            onChanged: (val) => setState(() => inductionChecklist[i] = val!),
+          );
+        }),
+      ],
     );
   }
 }
