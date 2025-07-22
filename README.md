@@ -5,6 +5,7 @@ This project is copyrighted for BIRVA AUS PTV LTD.
 ## Getting Started
 
 This project is a dedicated and premoided with the requirements of BIRVA AUS PTV LTD.
+Check (register_app\new rate form.pdf) for the form format. 
 
 Project contains the registeration form created on flutter, storing in local device in excel and print the form at the real-time . Storing format is excel and pdf. 
 
@@ -59,3 +60,4 @@ register_app
 --workplace_health.dart
 
 Add new files under .dart extension if it is a flutter file. 
+
