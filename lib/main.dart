@@ -50,54 +50,67 @@ class _EmployeeFormPageState extends State<EmployeeFormPage> {
     return Scaffold(
       appBar: AppBar(title: Text('BIRVA Employee & Rate Form')),
       body: SingleChildScrollView(
-        padding: EdgeInsets.all(16),
-        child: Form(
-          key: _formKey,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                "Employee Details",
-                style: Theme.of(context).textTheme.headlineMedium,
-              ),
-              _buildNameFields(),
-              _buildAddressContactFields(),
-              _buildDOBTaxVisaFields(),
-              _buildPassportEmploymentFields(),
-              _buildEmploymentStatusFields(),
-              _buildPayFields(),
-              _buildSuperFields(),
-              _buildBankFields(),
-              _buildPieceworkAgreementFields(),
-              _buildScheduleARates(),
-              ElevatedButton(
-                onPressed: () => _showPieceWorkPopup(context),
-                child: Text("Agree Piecework Agreement"),
-              ),
-              _buildInductionChecklist(),
-              _buildCovidDeclaration(),
+        child: Container(
+          decoration: BoxDecoration(
+            image: DecorationImage(
+              image: AssetImage("assets/background.png"),
+              fit: BoxFit.cover,
+              opacity: 0.5,
+            ),
+          ),
+          padding: EdgeInsets.all(16),
+          child: Form(
+            key: _formKey,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  "Employee Details",
+                  style: TextStyle(
+                    color: Colors.black87,
+                    fontSize: 30,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                _buildNameFields(),
+                _buildAddressContactFields(),
+                _buildDOBTaxVisaFields(),
+                _buildPassportEmploymentFields(),
+                _buildEmploymentStatusFields(),
+                _buildPayFields(),
+                _buildSuperFields(),
+                _buildBankFields(),
+                _buildPieceworkAgreementFields(),
+                _buildScheduleARates(),
+                ElevatedButton(
+                  onPressed: () => _showPieceWorkPopup(context),
+                  child: Text("Agree Piecework Agreement"),
+                ),
+                _buildInductionChecklist(),
+                _buildCovidDeclaration(),
 
-              //_buildEmergency(),
-              SizedBox(height: 20),
-              ElevatedButton(
-                onPressed: () => _showEmergencyPlanPopup(context),
-                child: Text("View Emergency Plan"),
-              ),
-              ElevatedButton(
-                onPressed: () => _showWorkPlaceHealthPopup(context),
-                child: Text("View Workplace Health & Saftey"),
-              ),
-              ElevatedButton(
-                onPressed: () {
-                  setState(() {
-                    hasAgreed = true;
-                    hasPieceworkAgreement = true; // Toggle agreement status
-                    hasEmergencyPlan = true; // Toggle emergency plan status
-                  });
-                },
-                child: Text("Submit"),
-              ),
-            ],
+                //_buildEmergency(),
+                SizedBox(height: 20),
+                ElevatedButton(
+                  onPressed: () => _showEmergencyPlanPopup(context),
+                  child: Text("View Emergency Plan"),
+                ),
+                ElevatedButton(
+                  onPressed: () => _showWorkPlaceHealthPopup(context),
+                  child: Text("View Workplace Health & Saftey"),
+                ),
+                ElevatedButton(
+                  onPressed: () {
+                    setState(() {
+                      hasAgreed = true;
+                      hasPieceworkAgreement = true; // Toggle agreement status
+                      hasEmergencyPlan = true; // Toggle emergency plan status
+                    });
+                  },
+                  child: Text("Submit"),
+                ),
+              ],
+            ),
           ),
         ),
       ),
@@ -109,14 +122,26 @@ class _EmployeeFormPageState extends State<EmployeeFormPage> {
       children: [
         Expanded(
           child: TextFormField(
-            decoration: InputDecoration(labelText: "First Name"),
+            decoration: InputDecoration(
+              labelText: "First Name",
+              labelStyle: TextStyle(
+                color: Colors.black87,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
             onChanged: (val) => firstName = val,
           ),
         ),
         SizedBox(width: 10),
         Expanded(
           child: TextFormField(
-            decoration: InputDecoration(labelText: "Last Name"),
+            decoration: InputDecoration(
+              labelText: "Last Name",
+              labelStyle: TextStyle(
+                color: Colors.black87,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
             onChanged: (val) => lastName = val,
           ),
         ),
@@ -128,21 +153,39 @@ class _EmployeeFormPageState extends State<EmployeeFormPage> {
     return Column(
       children: [
         TextFormField(
-          decoration: InputDecoration(labelText: "Address"),
+          decoration: InputDecoration(
+            labelText: "Address",
+            labelStyle: TextStyle(
+              color: Colors.black87,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
           onChanged: (val) => address = val,
         ),
         Row(
           children: [
             Expanded(
               child: TextFormField(
-                decoration: InputDecoration(labelText: "Contact No"),
+                decoration: InputDecoration(
+                  labelText: "Contact No",
+                  labelStyle: TextStyle(
+                    color: Colors.black87,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
                 onChanged: (val) => contactNo = val,
               ),
             ),
             SizedBox(width: 10),
             Expanded(
               child: TextFormField(
-                decoration: InputDecoration(labelText: "Email"),
+                decoration: InputDecoration(
+                  labelText: "Email",
+                  labelStyle: TextStyle(
+                    color: Colors.black87,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
                 onChanged: (val) => email = val,
               ),
             ),
@@ -159,14 +202,26 @@ class _EmployeeFormPageState extends State<EmployeeFormPage> {
           children: [
             Expanded(
               child: TextFormField(
-                decoration: InputDecoration(labelText: "Date of Birth"),
+                decoration: InputDecoration(
+                  labelText: "Date of Birth",
+                  labelStyle: TextStyle(
+                    color: Colors.black87,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
                 onChanged: (val) => dob = val,
               ),
             ),
             SizedBox(width: 10),
             Expanded(
               child: TextFormField(
-                decoration: InputDecoration(labelText: "Tax File Number"),
+                decoration: InputDecoration(
+                  labelText: "Tax File Number",
+                  labelStyle: TextStyle(
+                    color: Colors.black87,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
                 onChanged: (val) => taxFile = val,
               ),
             ),
@@ -176,14 +231,26 @@ class _EmployeeFormPageState extends State<EmployeeFormPage> {
           children: [
             Expanded(
               child: TextFormField(
-                decoration: InputDecoration(labelText: "Country"),
+                decoration: InputDecoration(
+                  labelText: "Country",
+                  labelStyle: TextStyle(
+                    color: Colors.black87,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
                 onChanged: (val) => country = val,
               ),
             ),
             SizedBox(width: 10),
             Expanded(
               child: TextFormField(
-                decoration: InputDecoration(labelText: "Visa Type"),
+                decoration: InputDecoration(
+                  labelText: "Visa Type",
+                  labelStyle: TextStyle(
+                    color: Colors.black87,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
                 onChanged: (val) => visaType = val,
               ),
             ),
@@ -193,14 +260,26 @@ class _EmployeeFormPageState extends State<EmployeeFormPage> {
           children: [
             Expanded(
               child: TextFormField(
-                decoration: InputDecoration(labelText: "Visa From"),
+                decoration: InputDecoration(
+                  labelText: "Visa From",
+                  labelStyle: TextStyle(
+                    color: Colors.black87,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
                 onChanged: (val) => visaFrom = val,
               ),
             ),
             SizedBox(width: 10),
             Expanded(
               child: TextFormField(
-                decoration: InputDecoration(labelText: "Visa To"),
+                decoration: InputDecoration(
+                  labelText: "Visa To",
+                  labelStyle: TextStyle(
+                    color: Colors.black87,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
                 onChanged: (val) => visaTo = val,
               ),
             ),
@@ -214,11 +293,23 @@ class _EmployeeFormPageState extends State<EmployeeFormPage> {
     return Column(
       children: [
         TextFormField(
-          decoration: InputDecoration(labelText: "Passport Number"),
+          decoration: InputDecoration(
+            labelText: "Passport Number",
+            labelStyle: TextStyle(
+              color: Colors.black87,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
           onChanged: (val) => passport = val,
         ),
         TextFormField(
-          decoration: InputDecoration(labelText: "Employment Start Date"),
+          decoration: InputDecoration(
+            labelText: "Employment Start Date",
+            labelStyle: TextStyle(
+              color: Colors.black87,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
           onChanged: (val) => employmentStartDate = val,
         ),
       ],
@@ -229,7 +320,13 @@ class _EmployeeFormPageState extends State<EmployeeFormPage> {
     return Column(
       children: [
         DropdownButtonFormField<String>(
-          decoration: InputDecoration(labelText: "Employment Status"),
+          decoration: InputDecoration(
+            labelText: "Employment Status",
+            labelStyle: TextStyle(
+              color: Colors.black87,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
           items: [
             "Ongoing",
             "Temporary",
@@ -244,11 +341,23 @@ class _EmployeeFormPageState extends State<EmployeeFormPage> {
         ),
         if (showOtherEmploymentStatus)
           TextFormField(
-            decoration: InputDecoration(labelText: "Specify Other Status"),
+            decoration: InputDecoration(
+              labelText: "Specify Other Status",
+              labelStyle: TextStyle(
+                color: Colors.black87,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
             onChanged: (val) => otherEmploymentStatus = val,
           ),
         DropdownButtonFormField<String>(
-          decoration: InputDecoration(labelText: "Employment Type"),
+          decoration: InputDecoration(
+            labelText: "Employment Type",
+            labelStyle: TextStyle(
+              color: Colors.black87,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
           items: [
             "Full-time",
             "Part-time",
@@ -264,11 +373,23 @@ class _EmployeeFormPageState extends State<EmployeeFormPage> {
         ),
         if (showOtherType)
           TextFormField(
-            decoration: InputDecoration(labelText: "Specify Other Type"),
+            decoration: InputDecoration(
+              labelText: "Specify Other Type",
+              labelStyle: TextStyle(
+                color: Colors.black87,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
             onChanged: (val) => otherType = val,
           ),
         TextFormField(
-          decoration: InputDecoration(labelText: "Ordinary Hours Worked"),
+          decoration: InputDecoration(
+            labelText: "Ordinary Hours Worked",
+            labelStyle: TextStyle(
+              color: Colors.black87,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
           onChanged: (val) => hoursWorked = val,
         ),
       ],
@@ -279,7 +400,13 @@ class _EmployeeFormPageState extends State<EmployeeFormPage> {
     return Column(
       children: [
         DropdownButtonFormField<String>(
-          decoration: InputDecoration(labelText: "Method of Pay"),
+          decoration: InputDecoration(
+            labelText: "Method of Pay",
+            labelStyle: TextStyle(
+              color: Colors.black87,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
           items: [
             "CASH",
             "BANK",
@@ -287,7 +414,13 @@ class _EmployeeFormPageState extends State<EmployeeFormPage> {
           onChanged: (val) => paymentMethod = val,
         ),
         DropdownButtonFormField<String>(
-          decoration: InputDecoration(labelText: "Pay Period"),
+          decoration: InputDecoration(
+            labelText: "Pay Period",
+            labelStyle: TextStyle(
+              color: Colors.black87,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
           items: [
             "WEEKLY",
             "FORTNIGHTLY",
@@ -304,14 +437,30 @@ class _EmployeeFormPageState extends State<EmployeeFormPage> {
         SizedBox(height: 20),
         Text(
           "Superannuation",
-          style: Theme.of(context).textTheme.headlineMedium,
+          style: TextStyle(
+            color: Colors.black87,
+            fontSize: 30,
+            fontWeight: FontWeight.bold,
+          ),
         ),
         TextFormField(
-          decoration: InputDecoration(labelText: "Super Fund Name"),
+          decoration: InputDecoration(
+            labelText: "Super Fund Name",
+            labelStyle: TextStyle(
+              color: Colors.black87,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
           onChanged: (val) => superFund = val,
         ),
         TextFormField(
-          decoration: InputDecoration(labelText: "Membership Number"),
+          decoration: InputDecoration(
+            labelText: "Membership Number",
+            labelStyle: TextStyle(
+              color: Colors.black87,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
           onChanged: (val) => superNumber = val,
         ),
       ],
@@ -322,27 +471,58 @@ class _EmployeeFormPageState extends State<EmployeeFormPage> {
     return Column(
       children: [
         SizedBox(height: 20),
-        Text("Bank Details", style: Theme.of(context).textTheme.headlineMedium),
+        Text(
+          "Bank Details",
+          style: TextStyle(
+            color: Colors.black87,
+            fontSize: 30,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
         TextFormField(
-          decoration: InputDecoration(labelText: "Bank Name"),
+          decoration: InputDecoration(
+            labelText: "Bank Name",
+            labelStyle: TextStyle(
+              color: Colors.black87,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
           onChanged: (val) => bankName = val,
         ),
         TextFormField(
-          decoration: InputDecoration(labelText: "Account Name"),
+          decoration: InputDecoration(
+            labelText: "Account Name",
+            labelStyle: TextStyle(
+              color: Colors.black87,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
           onChanged: (val) => bankAccountName = val,
         ),
         Row(
           children: [
             Expanded(
               child: TextFormField(
-                decoration: InputDecoration(labelText: "BSB"),
+                decoration: InputDecoration(
+                  labelText: "BSB",
+                  labelStyle: TextStyle(
+                    color: Colors.black87,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
                 onChanged: (val) => bsb = val,
               ),
             ),
             SizedBox(width: 10),
             Expanded(
               child: TextFormField(
-                decoration: InputDecoration(labelText: "Account Number"),
+                decoration: InputDecoration(
+                  labelText: "Account Number",
+                  labelStyle: TextStyle(
+                    color: Colors.black87,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
                 onChanged: (val) => accNumber = val,
               ),
             ),
@@ -358,32 +538,62 @@ class _EmployeeFormPageState extends State<EmployeeFormPage> {
         SizedBox(height: 30),
         Text(
           "Piecework Agreement",
-          style: Theme.of(context).textTheme.headlineMedium,
+          style: TextStyle(
+            color: Colors.black87,
+            fontSize: 30,
+            fontWeight: FontWeight.bold,
+          ),
         ),
         Text(
           "BIRVA AUS PTY LTD\n          AND\n    (Employee)\n",
-          style: Theme.of(context).textTheme.headlineSmall,
+          style: TextStyle(
+            color: Colors.black87,
+            fontSize: 30,
+            fontWeight: FontWeight.bold,
+          ),
         ),
         Text(
           "The Employer and the Employee agree to enter into this piecework Agreement (Agreement) under clause 15 (Piecework) of the horticulture Award 2010 [MA000028] (Award). The Employer and Employee mutually agree as follow:\n 1. The work performed under this agreement is as described below (Work) [Add description of work – e.g. picking/packing. If the employee also performs work that isn’t covered by the piecework agreement this should not be included here.]\n 2. The minimum piecework rates which must be paid by the employer to the Employee for performing the work is as specified in Schedule A to the Agreement\n 3. The Employee is Employed as a Casual/ part-time / full-time employee\n 4. The Employee must work in Individual on piece rate job.",
-          style: Theme.of(context).textTheme.bodyMedium,
+          style: TextStyle(
+            color: Colors.black87,
+            fontSize: 20,
+            fontWeight: FontWeight.normal,
+          ),
         ),
         TextFormField(
-          decoration: InputDecoration(labelText: "Agreement Start Date"),
+          decoration: InputDecoration(
+            labelText: "Agreement Start Date",
+            labelStyle: TextStyle(
+              color: Colors.black87,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
           onChanged: (val) => agreementStartDate = val,
         ),
         Row(
           children: [
             Expanded(
               child: TextFormField(
-                decoration: InputDecoration(labelText: "Employer Name"),
+                decoration: InputDecoration(
+                  labelText: "Employer Name",
+                  labelStyle: TextStyle(
+                    color: Colors.black87,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
                 onChanged: (val) => employerName = val,
               ),
             ),
             SizedBox(width: 10),
             Expanded(
               child: TextFormField(
-                decoration: InputDecoration(labelText: "Employee Name"),
+                decoration: InputDecoration(
+                  labelText: "Employee Name",
+                  labelStyle: TextStyle(
+                    color: Colors.black87,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
                 onChanged: (val) => employeeName = val,
               ),
             ),
@@ -393,14 +603,26 @@ class _EmployeeFormPageState extends State<EmployeeFormPage> {
           children: [
             Expanded(
               child: TextFormField(
-                decoration: InputDecoration(labelText: "Employer Signature"),
+                decoration: InputDecoration(
+                  labelText: "Employer Signature",
+                  labelStyle: TextStyle(
+                    color: Colors.black87,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
                 onChanged: (val) => employerSignature = val,
               ),
             ),
             SizedBox(width: 10),
             Expanded(
               child: TextFormField(
-                decoration: InputDecoration(labelText: "Employee Signature"),
+                decoration: InputDecoration(
+                  labelText: "Employee Signature",
+                  labelStyle: TextStyle(
+                    color: Colors.black87,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
                 onChanged: (val) => employeeSignature = val,
               ),
             ),
@@ -410,21 +632,39 @@ class _EmployeeFormPageState extends State<EmployeeFormPage> {
           children: [
             Expanded(
               child: TextFormField(
-                decoration: InputDecoration(labelText: "Date"),
+                decoration: InputDecoration(
+                  labelText: "Date",
+                  labelStyle: TextStyle(
+                    color: Colors.black87,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
                 onChanged: (val) => DateTime.now().toString(),
               ),
             ),
             SizedBox(width: 10),
             Expanded(
               child: TextFormField(
-                decoration: InputDecoration(labelText: "Date"),
+                decoration: InputDecoration(
+                  labelText: "Date",
+                  labelStyle: TextStyle(
+                    color: Colors.black87,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
                 onChanged: (val) => DateTime.now().toString(),
               ),
             ),
           ],
         ),
         TextFormField(
-          decoration: InputDecoration(labelText: "Position"),
+          decoration: InputDecoration(
+            labelText: "Position",
+            labelStyle: TextStyle(
+              color: Colors.black87,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
           onChanged: (val) => position = val,
         ),
       ],
@@ -446,10 +686,14 @@ class _EmployeeFormPageState extends State<EmployeeFormPage> {
       children: [
         Text(
           "\n Piecework Rates",
-          style: Theme.of(context).textTheme.headlineMedium,
+          style: TextStyle(
+            color: Colors.black87,
+            fontSize: 30,
+            fontWeight: FontWeight.bold,
+          ),
         ),
         ...rates.map(
-          (rate) => TextFormField(initialValue: rate, enabled: false),
+          (rate) => TextFormField(initialValue: rate, enabled: true),
         ),
       ],
     );
@@ -540,7 +784,11 @@ class _EmployeeFormPageState extends State<EmployeeFormPage> {
         SizedBox(height: 30),
         Text(
           "COVID-19 Health Declaration",
-          style: Theme.of(context).textTheme.headlineMedium,
+          style: TextStyle(
+            color: Colors.black87,
+            fontSize: 30,
+            fontWeight: FontWeight.bold,
+          ),
         ),
         ...questions.asMap().entries.map((entry) {
           final i = entry.key;
@@ -597,7 +845,11 @@ class _EmployeeFormPageState extends State<EmployeeFormPage> {
         SizedBox(height: 30),
         Text(
           "Induction Checklist",
-          style: Theme.of(context).textTheme.headlineMedium,
+          style: TextStyle(
+            color: Colors.black87,
+            fontSize: 30,
+            fontWeight: FontWeight.bold,
+          ),
         ),
         ...items.asMap().entries.map((entry) {
           final i = entry.key;
@@ -786,6 +1038,41 @@ class _EmployeeFormPageState extends State<EmployeeFormPage> {
                   style: Theme.of(context).textTheme.bodyMedium,
                 ),
                 // Add more terms as needed
+              ],
+            ),
+          ),
+          actions: [
+            TextButton(
+              onPressed: () {
+                setState(() {
+                  hasEmergencyPlan =
+                      true; // Assuming you have a hasAgreed variable
+                });
+                Navigator.of(context).pop();
+              },
+              child: Text("Agree"),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  void _showSubmitPopup(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: Text("Submit Form"),
+          content: SingleChildScrollView(
+            child: ListBody(
+              children: [
+                Text(
+                  "1. All the information mentioned are true to my knowledge. \n",
+                  style: Theme.of(context).textTheme.headlineSmall,
+                ),
+                //ElevatedButton(onPressed:  , child: Text("Submit")),
+                //ElevatedButton(onPressed: , child: Text("Print"))
               ],
             ),
           ),
