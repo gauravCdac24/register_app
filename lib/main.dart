@@ -88,7 +88,6 @@ class _EmployeeFormPageState extends State<EmployeeFormPage> {
                 ),
                 _buildInductionChecklist(),
                 _buildCovidDeclaration(),
-
                 //_buildEmergency(),
                 SizedBox(height: 20),
                 ElevatedButton(
@@ -100,13 +99,7 @@ class _EmployeeFormPageState extends State<EmployeeFormPage> {
                   child: Text("View Workplace Health & Saftey"),
                 ),
                 ElevatedButton(
-                  onPressed: () {
-                    setState(() {
-                      hasAgreed = true;
-                      hasPieceworkAgreement = true; // Toggle agreement status
-                      hasEmergencyPlan = true; // Toggle emergency plan status
-                    });
-                  },
+                  onPressed: () => _showSubmitPopup(context),
                   child: Text("Submit"),
                 ),
               ],
@@ -1068,7 +1061,7 @@ class _EmployeeFormPageState extends State<EmployeeFormPage> {
             child: ListBody(
               children: [
                 Text(
-                  "1. All the information mentioned are true to my knowledge. \n",
+                  " All the information mentioned are true to my knowledge. \n",
                   style: Theme.of(context).textTheme.headlineSmall,
                 ),
                 //ElevatedButton(onPressed:  , child: Text("Submit")),
