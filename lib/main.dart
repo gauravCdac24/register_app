@@ -1,5 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:register_app/splashscreen.dart';
+import 'package:pdf/pdf.dart';
+import 'package:printing/printing.dart';
+import 'package:register_app/printopdf.dart' as printopdf;
+import 'package:excel/excel.dart';
+import 'package:path_provider/path_provider.dart';
+import 'package:permission_handler/permission_handler.dart';
+import 'dart:io';
 
 void main() => runApp(
   MaterialApp(
@@ -41,6 +48,33 @@ class _EmployeeFormPageState extends State<EmployeeFormPage> {
   String? otherEmploymentStatus;
   bool showOtherType = false;
   String? otherType;
+
+  Map<String, String> formData = {
+    'First Name': '',
+    'Last Name': '',
+    'Address': '',
+    'Contact No': '',
+    'Email': '',
+    'Date of Birth': '',
+    'Tax File Number': '',
+    'Country': '',
+    'Visa Type': '',
+    'Visa From': '',
+    'Visa To': '',
+    'Passport Number': '',
+    'Employment Start Date': '',
+    'Employment Status': '',
+    'Employment Type': '',
+    'Ordinary Hours Worked': '',
+    'Method of Pay': '',
+    'Pay Period': '',
+    'Super Fund Name': '',
+    'Membership Number': '',
+    'Bank Name': '',
+    'Account Name': '',
+    'BSB': '',
+    'Account Number': '',
+  };
 
   List<String> covidAnswers = List.filled(6, '');
   List<bool> inductionChecklist = List.filled(9, false);
@@ -122,7 +156,7 @@ class _EmployeeFormPageState extends State<EmployeeFormPage> {
                 fontWeight: FontWeight.bold,
               ),
             ),
-            onChanged: (val) => firstName = val,
+            onChanged: (val) => formData['firstName'] = val,
           ),
         ),
         SizedBox(width: 10),
@@ -1064,25 +1098,60 @@ class _EmployeeFormPageState extends State<EmployeeFormPage> {
                   " All the information mentioned are true to my knowledge. \n",
                   style: Theme.of(context).textTheme.headlineSmall,
                 ),
-                //ElevatedButton(onPressed:  , child: Text("Submit")),
-                //ElevatedButton(onPressed: , child: Text("Print"))
+                ElevatedButton(
+                  onPressed: () {
+                    if (_formKey.currentState!.validate()) {
+                      saveFormAsExcel(formData);
+                      Navigator.of(context).pop();
+                    }
+                  },
+                  child: Text("Save as "),
+                ),
+                ElevatedButton(
+                  onPressed: () {
+                    if (_formKey.currentState!.validate()) {
+                      print(formData['firstName']);
+                      final pdfData = printopdf.generatePdfDocument(formData);
+                      Printing.layoutPdf(
+                        onLayout: (PdfPageFormat format) async => pdfData,
+                      );
+                      Navigator.of(context).pop();
+                    }
+                  },
+                  child: Text("Print PDF"),
+                ),
               ],
             ),
           ),
-          actions: [
-            TextButton(
-              onPressed: () {
-                setState(() {
-                  hasEmergencyPlan =
-                      true; // Assuming you have a hasAgreed variable
-                });
-                Navigator.of(context).pop();
-              },
-              child: Text("Agree"),
-            ),
-          ],
         );
       },
     );
+  }
+
+  Future<void> saveFormAsExcel(Map<String, String> formData) async {
+    var excel = Excel.createExcel(); // creates a new excel file
+    Sheet sheet = excel['Sheet1'];
+
+    // Write headers and values
+    int row = 0;
+    formData.forEach((key, value) {
+      sheet
+        ..cell(CellIndex.indexByString("A${row + 1}")).value = formData[key]
+        ..cell(CellIndex.indexByString("B${row + 1}")).value = formData[value];
+      row++;
+    });
+
+    // Get path and save
+    final status = await Permission.storage.request();
+    if (status.isGranted) {
+      final directory = await getExternalStorageDirectory();
+      String outputFile = "${directory!.path}/form_data.xlsx";
+      File(outputFile)
+        ..createSync(recursive: true)
+        ..writeAsBytesSync(excel.encode()!);
+      print("Excel saved to: $outputFile");
+    } else {
+      print("Storage permission not granted.");
+    }
   }
 }
