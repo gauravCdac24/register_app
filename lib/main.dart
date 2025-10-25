@@ -156,7 +156,7 @@ class _EmployeeFormPageState extends State<EmployeeFormPage> {
                 fontWeight: FontWeight.bold,
               ),
             ),
-            onChanged: (val) => formData['firstName'] = val,
+            onChanged: (val) => formData['First Name'] = val,
           ),
         ),
         SizedBox(width: 10),
@@ -169,7 +169,7 @@ class _EmployeeFormPageState extends State<EmployeeFormPage> {
                 fontWeight: FontWeight.bold,
               ),
             ),
-            onChanged: (val) => lastName = val,
+            onChanged: (val) => formData['Last Name'] = val,
           ),
         ),
       ],
@@ -187,7 +187,7 @@ class _EmployeeFormPageState extends State<EmployeeFormPage> {
               fontWeight: FontWeight.bold,
             ),
           ),
-          onChanged: (val) => address = val,
+          onChanged: (val) => formData['Address'] = val,
         ),
         Row(
           children: [
@@ -200,7 +200,7 @@ class _EmployeeFormPageState extends State<EmployeeFormPage> {
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                onChanged: (val) => contactNo = val,
+                onChanged: (val) => formData['Contact No'] = val,
               ),
             ),
             SizedBox(width: 10),
@@ -213,7 +213,7 @@ class _EmployeeFormPageState extends State<EmployeeFormPage> {
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                onChanged: (val) => email = val,
+                onChanged: (val) => formData['Email'] = val,
               ),
             ),
           ],
@@ -236,7 +236,7 @@ class _EmployeeFormPageState extends State<EmployeeFormPage> {
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                onChanged: (val) => dob = val,
+                onChanged: (val) => formData['Date of Birth'] = val,
               ),
             ),
             SizedBox(width: 10),
@@ -249,7 +249,7 @@ class _EmployeeFormPageState extends State<EmployeeFormPage> {
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                onChanged: (val) => taxFile = val,
+                onChanged: (val) => formData['Tax File Number'] = val,
               ),
             ),
           ],
@@ -265,7 +265,7 @@ class _EmployeeFormPageState extends State<EmployeeFormPage> {
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                onChanged: (val) => country = val,
+                onChanged: (val) => formData['Country'] = val,
               ),
             ),
             SizedBox(width: 10),
@@ -278,7 +278,7 @@ class _EmployeeFormPageState extends State<EmployeeFormPage> {
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                onChanged: (val) => visaType = val,
+                onChanged: (val) => formData['Visa Type'] = val,
               ),
             ),
           ],
@@ -294,7 +294,7 @@ class _EmployeeFormPageState extends State<EmployeeFormPage> {
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                onChanged: (val) => visaFrom = val,
+                onChanged: (val) => formData['Visa From'] = val,
               ),
             ),
             SizedBox(width: 10),
@@ -307,7 +307,7 @@ class _EmployeeFormPageState extends State<EmployeeFormPage> {
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                onChanged: (val) => visaTo = val,
+                onChanged: (val) => formData['Visa To'] = val,
               ),
             ),
           ],
@@ -327,7 +327,7 @@ class _EmployeeFormPageState extends State<EmployeeFormPage> {
               fontWeight: FontWeight.bold,
             ),
           ),
-          onChanged: (val) => passport = val,
+          onChanged: (val) => formData['Passport Number'] = val,
         ),
         TextFormField(
           decoration: InputDecoration(
@@ -337,7 +337,7 @@ class _EmployeeFormPageState extends State<EmployeeFormPage> {
               fontWeight: FontWeight.bold,
             ),
           ),
-          onChanged: (val) => employmentStartDate = val,
+          onChanged: (val) => formData['Employment Start Date'] = val,
         ),
       ],
     );
@@ -362,6 +362,7 @@ class _EmployeeFormPageState extends State<EmployeeFormPage> {
           onChanged: (val) {
             setState(() {
               employmentStatus = val;
+              formData['Employment Status'] = val!;
               showOtherEmploymentStatus = val == "Other";
             });
           },
@@ -375,7 +376,7 @@ class _EmployeeFormPageState extends State<EmployeeFormPage> {
                 fontWeight: FontWeight.bold,
               ),
             ),
-            onChanged: (val) => otherEmploymentStatus = val,
+            onChanged: (val) => formData['Employment Status'] = val,
           ),
         DropdownButtonFormField<String>(
           decoration: InputDecoration(
@@ -394,6 +395,7 @@ class _EmployeeFormPageState extends State<EmployeeFormPage> {
           onChanged: (val) {
             setState(() {
               employmentType = val;
+              formData['Employment Type'] = val!;
               showOtherType = val == "Other";
             });
           },
@@ -407,7 +409,7 @@ class _EmployeeFormPageState extends State<EmployeeFormPage> {
                 fontWeight: FontWeight.bold,
               ),
             ),
-            onChanged: (val) => otherType = val,
+            onChanged: (val) => formData['Employment Type'] = val,
           ),
         TextFormField(
           decoration: InputDecoration(
@@ -417,7 +419,7 @@ class _EmployeeFormPageState extends State<EmployeeFormPage> {
               fontWeight: FontWeight.bold,
             ),
           ),
-          onChanged: (val) => hoursWorked = val,
+          onChanged: (val) => formData['Ordinary Hours Worked'] = val,
         ),
       ],
     );
@@ -438,7 +440,7 @@ class _EmployeeFormPageState extends State<EmployeeFormPage> {
             "CASH",
             "BANK",
           ].map((e) => DropdownMenuItem(value: e, child: Text(e))).toList(),
-          onChanged: (val) => paymentMethod = val,
+          onChanged: (val) => formData['Method of Pay'] = val!,
         ),
         DropdownButtonFormField<String>(
           decoration: InputDecoration(
@@ -452,7 +454,7 @@ class _EmployeeFormPageState extends State<EmployeeFormPage> {
             "WEEKLY",
             "FORTNIGHTLY",
           ].map((e) => DropdownMenuItem(value: e, child: Text(e))).toList(),
-          onChanged: (val) => payPeriod = val,
+          onChanged: (val) => formData['Pay Period'] = val!,
         ),
       ],
     );
@@ -478,7 +480,7 @@ class _EmployeeFormPageState extends State<EmployeeFormPage> {
               fontWeight: FontWeight.bold,
             ),
           ),
-          onChanged: (val) => superFund = val,
+          onChanged: (val) => formData['Super Fund Name'] = val,
         ),
         TextFormField(
           decoration: InputDecoration(
@@ -488,7 +490,7 @@ class _EmployeeFormPageState extends State<EmployeeFormPage> {
               fontWeight: FontWeight.bold,
             ),
           ),
-          onChanged: (val) => superNumber = val,
+          onChanged: (val) => formData['Membership Number'] = val,
         ),
       ],
     );
@@ -514,7 +516,7 @@ class _EmployeeFormPageState extends State<EmployeeFormPage> {
               fontWeight: FontWeight.bold,
             ),
           ),
-          onChanged: (val) => bankName = val,
+          onChanged: (val) => formData['Bank Name'] = val,
         ),
         TextFormField(
           decoration: InputDecoration(
@@ -524,7 +526,7 @@ class _EmployeeFormPageState extends State<EmployeeFormPage> {
               fontWeight: FontWeight.bold,
             ),
           ),
-          onChanged: (val) => bankAccountName = val,
+          onChanged: (val) => formData['Account Name'] = val,
         ),
         Row(
           children: [
@@ -537,7 +539,7 @@ class _EmployeeFormPageState extends State<EmployeeFormPage> {
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                onChanged: (val) => bsb = val,
+                onChanged: (val) => formData['BSB'] = val,
               ),
             ),
             SizedBox(width: 10),
@@ -550,7 +552,7 @@ class _EmployeeFormPageState extends State<EmployeeFormPage> {
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                onChanged: (val) => accNumber = val,
+                onChanged: (val) => formData['Account Number'] = val,
               ),
             ),
           ],
@@ -595,7 +597,7 @@ class _EmployeeFormPageState extends State<EmployeeFormPage> {
               fontWeight: FontWeight.bold,
             ),
           ),
-          onChanged: (val) => agreementStartDate = val,
+          onChanged: (val) => formData['Agreement Start Date'] = val,
         ),
         Row(
           children: [
@@ -608,7 +610,7 @@ class _EmployeeFormPageState extends State<EmployeeFormPage> {
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                onChanged: (val) => employerName = val,
+                onChanged: (val) => formData['Employer Name'] = val,
               ),
             ),
             SizedBox(width: 10),
@@ -621,7 +623,7 @@ class _EmployeeFormPageState extends State<EmployeeFormPage> {
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                onChanged: (val) => employeeName = val,
+                onChanged: (val) => formData['Employee Name'] = val,
               ),
             ),
           ],
@@ -637,7 +639,7 @@ class _EmployeeFormPageState extends State<EmployeeFormPage> {
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                onChanged: (val) => employerSignature = val,
+                onChanged: (val) => formData['Employer Signature'] = val,
               ),
             ),
             SizedBox(width: 10),
@@ -650,7 +652,7 @@ class _EmployeeFormPageState extends State<EmployeeFormPage> {
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                onChanged: (val) => employeeSignature = val,
+                onChanged: (val) => formData['Employee Signature'] = val,
               ),
             ),
           ],
@@ -692,7 +694,7 @@ class _EmployeeFormPageState extends State<EmployeeFormPage> {
               fontWeight: FontWeight.bold,
             ),
           ),
-          onChanged: (val) => position = val,
+          onChanged: (val) => formData['Position'] = val,
         ),
       ],
     );
@@ -1110,7 +1112,6 @@ class _EmployeeFormPageState extends State<EmployeeFormPage> {
                 ElevatedButton(
                   onPressed: () {
                     if (_formKey.currentState!.validate()) {
-                      print(formData['firstName']);
                       final pdfData = printopdf.generatePdfDocument(formData);
                       Printing.layoutPdf(
                         onLayout: (PdfPageFormat format) async => pdfData,
